@@ -4,6 +4,8 @@ import {
   IsNotEmpty,
   IsString,
   IsStrongPassword,
+  MaxLength,
+  MinLength,
 } from 'class-validator';
 import { Match } from 'src/common/validations/decorators/match.decorator';
 
@@ -13,6 +15,9 @@ export class CreateUserDto {
     description: 'The username of the User',
   })
   @IsString()
+  @IsNotEmpty()
+  @MinLength(3)
+  @MaxLength(12)
   username: string;
 
   @ApiProperty({
