@@ -63,8 +63,15 @@ export class PostsController {
     return this.postsService.update(post, updatePostDto);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string, @Req() request: Request) {
+    const post = await this.postsService.findOne(id);
+    if (!post) throw new NotFoundException('Post not found');
+    const userId = request['user'].sub;
+    if (post.user.id !== userId)
+      throw new UnauthorizedException('You are not the author of this post');
     return this.postsService.remove(id);
   }
 }

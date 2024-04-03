@@ -26,7 +26,7 @@ export class PostsService {
     return this.postsRepository.find();
   }
 
-  findOne(id: string) {
+  async findOne(id: string) {
     return this.postsRepository.findOne({
       where: { id },
       relations: ['user'],
