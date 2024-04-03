@@ -3,12 +3,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  // OneToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-// import { Product } from 'src/products/entities/product.entity';
+import { Post } from 'src/posts/entities/post.entity';
 
 @Entity()
 export class User {
@@ -37,8 +37,8 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  // @OneToMany(() => Product, (product) => product.user)
-  // products: Product[];
+  @OneToMany(() => Post, (posts) => posts.user)
+  posts: Post[];
 
   @BeforeInsert()
   async hashPassword() {
