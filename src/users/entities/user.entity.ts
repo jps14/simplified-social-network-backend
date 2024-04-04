@@ -1,20 +1,10 @@
-import {
-  BeforeInsert,
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { AbstractBaseEntity } from 'src/common/entities/base.entity';
 import { Post } from 'src/posts/entities/post.entity';
+import { BeforeInsert, Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class User extends AbstractBaseEntity {
   @Column({
     unique: true,
   })
@@ -30,12 +20,6 @@ export class User {
 
   @Column({ select: false })
   password: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 
   @OneToMany(() => Post, (posts) => posts.user)
   posts: Post[];
