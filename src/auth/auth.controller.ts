@@ -5,11 +5,12 @@ import {
   Post,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { SignInDto } from './dto/signIn.dto';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UsersService } from 'src/users/users.service';
-import { ApiTags } from '@nestjs/swagger';
+
+import { AuthService } from './auth.service';
+import { SignInDto } from './dto/signIn.dto';
 
 @ApiTags('auth')
 @Controller('auth')

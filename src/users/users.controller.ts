@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
+
 import { UpdatePasswordDTO } from './dto/update-password.dto';
 import { UsersService } from './users.service';
 

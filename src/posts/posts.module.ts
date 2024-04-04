@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { PostsService } from './posts.service';
-import { PostsController } from './posts.controller';
 import { JwtModule } from '@nestjs/jwt';
-import { UsersModule } from 'src/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from 'src/users/users.module';
+
 import { Post } from './entities/post.entity';
+import { PostsController } from './posts.controller';
+import { PostsService } from './posts.service';
 
 @Module({
   controllers: [PostsController],

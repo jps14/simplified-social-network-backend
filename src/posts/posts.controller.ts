@@ -1,22 +1,24 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
-  UseGuards,
-  Req,
+  Get,
   NotFoundException,
+  Param,
+  Patch,
+  Post,
+  Req,
   UnauthorizedException,
+  UseGuards,
 } from '@nestjs/common';
-import { PostsService } from './posts.service';
-import { CreatePostDto } from './dto/create-post.dto';
-import { UpdatePostDto } from './dto/update-post.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { UsersService } from 'src/users/users.service';
+
+import { CreatePostDto } from './dto/create-post.dto';
+import { ReturnPostDTO } from './dto/return-post.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
+import { PostsService } from './posts.service';
 
 @ApiTags('Posts')
 @Controller('posts')
@@ -44,7 +46,7 @@ export class PostsController {
   async findOne(@Param('id') id: string) {
     const post = await this.postsService.findOne(id);
     if (!post) throw new NotFoundException('Post not found');
-    return post;
+    return new ReturnPostDTO(post);
   }
 
   @ApiBearerAuth()
